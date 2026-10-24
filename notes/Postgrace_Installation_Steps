@@ -1,0 +1,17 @@
+Step 1: Install PostgreSQL
+Download: Go to PostgreSQL official site and choose your operating system (Windows, macOS, Linux).
+
+Install: Run the installer. It will set up:
+
+PostgreSQL server
+
+pgAdmin (GUI tool for managing databases)
+
+Command-line tools (psql)
+
+Set Password: During installation, you’ll be asked to set a password for the default postgres user. Keep this safe.
+
+password - tiger
+
+
+pip install psycopg2

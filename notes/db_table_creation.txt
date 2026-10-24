@@ -1,0 +1,52 @@
+CREATE TABLE dim_customer (
+    customer_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    segment VARCHAR(50),
+    domicile VARCHAR(50),
+    risk_profile VARCHAR(50)
+);
+
+CREATE TABLE dim_account (
+    account_id SERIAL PRIMARY KEY,
+    account_type VARCHAR(50),
+    currency VARCHAR(10),
+    opened_date DATE,
+    status VARCHAR(20)
+);
+
+CREATE TABLE dim_product (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100),
+    product_type VARCHAR(50),
+    risk_level VARCHAR(20),
+    issuer VARCHAR(100)
+);
+
+CREATE TABLE dim_date (
+    date_id SERIAL PRIMARY KEY,
+    full_date DATE,
+    year INT,
+    quarter INT,
+    month INT,
+    day INT
+);
+
+CREATE TABLE dim_relationship_manager (
+    rm_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    region VARCHAR(50),
+    department VARCHAR(50),
+    hire_date DATE
+);
+
+CREATE TABLE fact_portfolio (
+    portfolio_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES dim_customer(customer_id),
+    account_id INT REFERENCES dim_account(account_id),
+    product_id INT REFERENCES dim_product(product_id),
+    date_id INT REFERENCES dim_date(date_id),
+    rm_id INT REFERENCES dim_relationship_manager(rm_id),
+    aum_value NUMERIC(18,2),
+    revenue NUMERIC(18,2),
+    nna_value NUMERIC(18,2)
+);

@@ -1,0 +1,95 @@
+Private Banking Star Schema (Data Model)
+Fact Table
+fact_portfolio
+
+portfolio_id (PK)
+
+customer_id (FK → dim_customer)
+
+account_id (FK → dim_account)
+
+product_id (FK → dim_product)
+
+date_id (FK → dim_date)
+
+rm_id (FK → dim_relationship_manager)
+
+aum_value
+
+revenue
+
+nna_value
+
+Dimension Tables
+dim_customer
+
+customer_id (PK)
+
+name
+
+segment
+
+domicile
+
+risk_profile
+
+dim_account
+
+account_id (PK)
+
+account_type
+
+currency
+
+opened_date
+
+status
+
+dim_product
+
+product_id (PK)
+
+product_name
+
+product_type
+
+risk_level
+
+issuer
+
+dim_date
+
+date_id (PK)
+
+full_date
+
+year
+
+quarter
+
+month
+
+day
+
+dim_relationship_manager
+
+rm_id (PK)
+
+name
+
+region
+
+department
+
+hire_date
+
+🔗 Relationships
+fact_portfolio.customer_id → dim_customer.customer_id
+
+fact_portfolio.account_id → dim_account.account_id
+
+fact_portfolio.product_id → dim_product.product_id
+
+fact_portfolio.date_id → dim_date.date_id
+
+fact_portfolio.rm_id → dim_relationship_manager.rm_id

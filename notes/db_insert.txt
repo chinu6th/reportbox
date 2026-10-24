@@ -1,0 +1,35 @@
+INSERT INTO dim_customer (name, segment, domicile, risk_profile)
+VALUES
+('Alice Tan', 'HNW', 'Singapore', 'Balanced'),
+('John Smith', 'UHNW', 'USA', 'Aggressive'),
+('Maria Lopez', 'Retail', 'Spain', 'Conservative');
+INSERT INTO dim_account (account_type, currency, opened_date, status)
+VALUES
+('Investment', 'USD', '2020-05-12', 'Active'),
+('Savings', 'EUR', '2019-03-01', 'Active'),
+('Brokerage', 'SGD', '2021-07-20', 'Closed');
+INSERT INTO dim_product (product_name, product_type, risk_level, issuer)
+VALUES
+('Global Equity Fund', 'Equity', 'High', 'BlackRock'),
+('Government Bond 10Y', 'Bond', 'Low', 'US Treasury'),
+('Balanced Growth Portfolio', 'Fund', 'Medium', 'UBS');
+INSERT INTO dim_product (product_name, product_type, risk_level, issuer)
+VALUES
+('Global Equity Fund', 'Equity', 'High', 'BlackRock'),
+('Government Bond 10Y', 'Bond', 'Low', 'US Treasury'),
+('Balanced Growth Portfolio', 'Fund', 'Medium', 'UBS');
+INSERT INTO dim_date (full_date, year, quarter, month, day)
+VALUES
+('2023-01-15', 2023, 1, 1, 15),
+('2023-03-10', 2023, 1, 3, 10),
+('2023-07-25', 2023, 3, 7, 25);
+INSERT INTO dim_relationship_manager (name, region, department, hire_date)
+VALUES
+('Sarah Lee', 'APAC', 'Wealth Management', '2018-06-01'),
+('David Brown', 'EMEA', 'Private Banking', '2015-09-15'),
+('Emily Chen', 'Americas', 'Investment Advisory', '2020-01-20');
+INSERT INTO fact_portfolio (customer_id, account_id, product_id, date_id, rm_id, aum_value, revenue, nna_value)
+VALUES
+(1, 1, 1, 1, 1, 5000000.00, 25000.00, 200000.00),
+(2, 2, 2, 2, 2, 12000000.00, 60000.00, -500000.00),
+(3, 3, 3, 3, 3, 300000.00, 1500.00, 10000.00);
