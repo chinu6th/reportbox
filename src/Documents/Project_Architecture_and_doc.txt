@@ -1,0 +1,102 @@
+Private Banking Data Warehouse Project Document
+1. Project Overview
+Project Name: Private Banking Analytics Data Warehouse
+
+Objective: Build a PostgreSQL star schema to support KPIs such as Assets Under Management (AUM), Revenue, and Net New Assets (NNA).
+
+Scope:
+
+Design schema with 5 dimension tables and 1 fact table.
+
+Populate with sample data for testing.
+
+Enable reporting and dashboard integration.
+
+2. Business Goals
+Provide a single source of truth for private banking analytics.
+
+Enable relationship managers and executives to track client portfolios.
+
+Support regulatory reporting and performance monitoring.
+
+Facilitate data-driven decision making for product offerings and client segmentation.
+
+3. Key Performance Indicators (KPIs)
+AUM (Assets Under Management): Total value of client portfolios.
+
+Revenue: Fees and commissions generated.
+
+NNA (Net New Assets): Inflows minus outflows of client funds.
+
+Client Segmentation Metrics: AUM by segment (HNW, UHNW, Retail).
+
+RM Performance: Revenue and AUM managed per relationship manager.
+
+4. Data Model (Star Schema)
+Fact Table: fact_portfolio
+
+Measures: aum_value, revenue, nna_value
+
+Foreign Keys: customer_id, account_id, product_id, date_id, rm_id
+
+Dimension Tables:
+
+dim_customer → Client attributes (segment, domicile, risk profile)
+
+dim_account → Account details (type, currency, status)
+
+dim_product → Product details (type, risk level, issuer)
+
+dim_date → Calendar attributes (year, quarter, month, day)
+
+dim_relationship_manager → RM details (region, department, hire date)
+
+5. Data Dictionary (Summary)
+Table	Purpose	Key Columns
+dim_customer	Stores client info	customer_id, segment, domicile
+dim_account	Account metadata	account_id, account_type, currency
+dim_product	Product catalog	product_id, product_type, risk_level
+dim_date	Time dimension	date_id, year, month, quarter
+dim_relationship_manager	RM details	rm_id, region, department
+fact_portfolio	Portfolio metrics	aum_value, revenue, nna_value
+
+
+6. Sample Queries
+Total AUM by Segment:
+
+sql
+SELECT dc.segment, SUM(fp.aum_value) AS total_aum
+FROM fact_portfolio fp
+JOIN dim_customer dc ON fp.customer_id = dc.customer_id
+GROUP BY dc.segment;
+Revenue by Relationship Manager:
+
+sql
+SELECT rm.name, SUM(fp.revenue) AS total_revenue
+FROM fact_portfolio fp
+JOIN dim_relationship_manager rm ON fp.rm_id = rm.rm_id
+GROUP BY rm.name;
+NNA by Product Type:
+
+sql
+SELECT dp.product_type, SUM(fp.nna_value) AS total_nna
+FROM fact_portfolio fp
+JOIN dim_product dp ON fp.product_id = dp.product_id
+GROUP BY dp.product_type;
+7. Project Deliverables
+PostgreSQL database schema (DDL scripts).
+
+Sample data inserts for testing.
+
+Documentation (this project document + ER diagram).
+
+Example queries for KPI reporting.
+
+8. Next Steps
+Populate tables with larger synthetic datasets (e.g., 1000+ rows).
+
+Connect to BI tools (Power BI, Tableau, or Metabase).
+
+Automate ETL pipelines for real data ingestion.
+
+Build dashboards for executives and RMs.

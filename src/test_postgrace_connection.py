@@ -12,8 +12,6 @@ conn = psycopg2.connect(
 # Create a cursor
 cur = conn.cursor()
 
-
-
 # Query data
 cur.execute("SELECT * FROM dim_customer;")
 rows = cur.fetchall()
